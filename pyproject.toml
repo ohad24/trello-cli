@@ -10,8 +10,8 @@ classifiers = [
 description = "Trello CLI tool"
 homepage = "https://github.com/ohad24/trello-cli"
 license = "MIT"
-name = "trellocli_ohad24"
-packages = [{include = "trellocli_ohad24"}]
+name = "trellocli2"
+packages = [{include = "trellocli"}]
 readme = "README.md"
 repository = "https://github.com/ohad24/trello-cli"
 version = "0.0.3"
