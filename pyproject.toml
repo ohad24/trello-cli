@@ -1,0 +1,38 @@
+[tool.poetry]
+authors = ["Ohad Mizrachi <ohad24@gmail.com>"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+description = "Trello CLI tool"
+homepage = "https://github.com/ohad24/trello-cli"
+license = "MIT"
+name = "trellocli_ohad24"
+packages = [{include = "trellocli_ohad24"}]
+readme = "README.md"
+repository = "https://github.com/ohad24/trello-cli"
+version = "0.0.3"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/ohad24/trello-cli/issues"
+
+[tool.poetry.dependencies]
+fire = "^0.4.0"
+pydantic = "^1.9.1"
+python = "^3.10"
+python-dotenv = "^0.20.0"
+requests = "^2.28.1"
+tabulate = "^0.8.10"
+
+[tool.poetry.scripts]
+tcli = "trellocli.TrelloCLI:main"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
