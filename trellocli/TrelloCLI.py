@@ -1,25 +1,23 @@
 from TrelloAPIclient import TrelloClient
 import fire
-from dotenv import load_dotenv
-import os
 from tabulate import tabulate
 from . import __version__
 
 
-class TrelloCLI():
-    def __init__(self, **data):
-        load_dotenv()
-        self.API_KEY = os.getenv("API_KEY")
-        self.API_TOKEN = os.getenv("API_TOKEN")
-        super().__init__(**data)
+class TrelloCLI:
+    # def __init__(self, **data):
+    #     self.version = __version__
 
-    def _format_data_table(self, data:list):
+    def _format_data_table(self, data: list):
         headers = list(data[0].dict().keys())
         rows = [row.dict().values() for row in data]
         print(tabulate(rows, headers, tablefmt="grid"))
 
     def get_lists(self, board_id: str):
-        client = TrelloClient(API_KEY=self.API_KEY, API_TOKEN=self.API_TOKEN)
+        """
+        Get all lists from a board
+        """
+        client = TrelloClient()
         status, res = client.get_lists(board_id=board_id)
         if status == 200:
             self._format_data_table(res)
@@ -27,7 +25,10 @@ class TrelloCLI():
             print(res)
 
     def get_cards(self, list_id: str):
-        client = TrelloClient(API_KEY=self.API_KEY, API_TOKEN=self.API_TOKEN, list_id=list_id)
+        """
+        Get all cards from a list
+        """
+        client = TrelloClient(list_id=list_id)
         status, res = client.get_cards(list_id)
         if status == 200:
             self._format_data_table(res)
@@ -35,19 +36,15 @@ class TrelloCLI():
             print(res)
 
     def version(self):
+        """
+        Prints the version of the CLI
+        """
         print(__version__)
 
-def main():
-    cli = TrelloCLI()
-    fire.Fire(cli)
 
-if __name__ == '__main__':
-    # load_dotenv()
-    # API_KEY = os.getenv("API_KEY")
-    # API_TOKEN = os.getenv("API_TOKEN")
-    # BOARD_ID = os.getenv("BOARD_ID")
-    # cli = TrelloCLI(API_KEY=API_KEY, API_TOKEN=API_TOKEN, BOARD_ID=BOARD_ID)
-    # cli = TrelloCLI(API_KEY=API_KEY, API_TOKEN=API_TOKEN, BOARD_ID="")
-    # cli = TrelloCLI()
-    # fire.Fire(cli)
+def main():
+    fire.Fire(TrelloCLI)
+
+
+if __name__ == "__main__":
     main()

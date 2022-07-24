@@ -6,6 +6,8 @@ import os
 from pydantic import BaseModel, PrivateAttr
 from models import TrelloList, TrelloCard
 
+load_dotenv()
+
 # class TrelloClient:
 #     # https://stackoverflow.com/questions/63492123/how-do-add-an-assembled-field-to-a-pydantic-model
 #     def __init__(self, API_KEY, API_TOKEN, BOARD_ID):
@@ -13,9 +15,8 @@ from models import TrelloList, TrelloCard
 #         self.board_id = BOARD_ID
 #         self.api_url = "https://api.trello.com/1/"
 class TrelloClient(BaseModel):
-    API_KEY: str
-    API_TOKEN: str
-    # BOARD_ID: str
+    API_KEY: str = os.getenv("API_KEY")
+    API_TOKEN: str = os.getenv("API_TOKEN")
     _query_params: dict = PrivateAttr()
     _api_url: str = PrivateAttr(default="https://api.trello.com/1/")
 
@@ -23,8 +24,8 @@ class TrelloClient(BaseModel):
         # print(data)
         super().__init__(**data)
         self._query_params = {
-            "key": data.get("API_KEY"),
-            "token": data.get("API_TOKEN"),
+            "key": self.API_KEY,
+            "token": self.API_TOKEN,
         }
 
     def _make_requests(self, url: str) -> Tuple[int, Union[dict, str]]:
