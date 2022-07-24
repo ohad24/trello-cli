@@ -14,6 +14,9 @@ poetry build
 # install package from wheel file.  
 pip install ~/projects/trello-cli/dist/trellocli_ohad24-0.0.3-py3-none-any.whl --upgrade --force-reinstall
 
+# test
+poetry run pytest tests/
+
 # use
 tcli get-lists NLelg4Zf
 # or in development mode

@@ -3,6 +3,7 @@ import fire
 from dotenv import load_dotenv
 import os
 from tabulate import tabulate
+from . import __version__
 
 
 class TrelloCLI():
@@ -32,6 +33,9 @@ class TrelloCLI():
             self._format_data_table(res)
         else:
             print(res)
+
+    def version(self):
+        print(__version__)
 
 def main():
     cli = TrelloCLI()
